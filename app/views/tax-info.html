@@ -1,0 +1,58 @@
+<form novalidate>
+    <div class="panel panel-default">
+            <div class="panel-heading">Tax Information</div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fName1">State of Residence:</label>
+                            <select type="text" class="form-control" id="fName1" ng-model="user.state">
+                                <option ng-repeat="state in states">{{state.alpha}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fName2">Martial Status:</label>
+                            <select type="text" class="form-control" id="fName2" ng-model="user.taxStatus">
+                                <option>Single Filer</option>
+                                <option>Married Filing Jointly</option>
+                                <option>Married Filing Separately</option>
+                                <option>Head of Household</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fName2">Estimated Effective Federal Income Tax Ratet:</label>
+                            <input type="text" class="form-control" id="fName2" ng-model="user.fedTax" ui-percentage-mask="2">
+                            <div class="btn-group">
+                                <label class="btn btn-primary" ng-model="radioFedTax" uib-btn-radio="'User Provided'">User Provided</label>
+                                <label class="btn btn-primary" ng-model="radioFedTax" uib-btn-radio="'Calculated'">Calculated</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fName2">Estimated Effective State Income Tax Rate:</label>
+                            <input type="text" class="form-control" id="fName2" ng-model="user.stateTax" ui-percentage-mask="2">
+                            <div class="btn-group">
+                                <label class="btn btn-primary" ng-model="radioStateTax" uib-btn-radio="'User Provided'">User Provided</label>
+                                <label class="btn btn-primary" ng-model="radioStateTax" uib-btn-radio="'Calculated'">Calculated</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fName2">Estimated Total Effective Income Tax Rate:</label>
+                            <input type="text" class="form-control" id="fName2" ng-model="user.fedTax+user.stateTax" ui-percentage-mask="2">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fName2">Estimated Capital Gains Rate:</label>
+                            <input type="text" class="form-control" id="fName2" ng-model="user.capGain" ui-percentage-mask="2">
+                            <div class="btn-group">
+                                <label class="btn btn-primary" ng-model="radioCapGain" uib-btn-radio="'User Provided'">User Provided</label>
+                                <label class="btn btn-primary" ng-model="radioCapGain" uib-btn-radio="'Calculated'">Calculated</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+</form>

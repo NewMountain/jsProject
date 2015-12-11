@@ -1,0 +1,93 @@
+<form novalidate>
+    <div class="panel panel-default">
+        <div class="panel-heading">Investment Strategies</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="sel1">Please Select the Number of Strategies <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The number of investment models or strategies to be tested in this Monte-Carlo simulation'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                <select class="form-control" ng-model="models.numModels" ng-change="populateModels(models)">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                </select>
+            </div>
+            <uib-accordion close-others="oneAtATime">
+                <uib-accordion-group heading="Strategy {{model.num}}" ng-repeat="model in models.models">
+                    <div class="md-col-12">
+                        <label>Model Construction: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='Simplified construction allows the selection of an allocation model. Advanced allows you to define a custom asset allocation.'><span class="glyphicon glyphicon-question-sign"></span></a> </label>
+                        <div class="btn-group">
+                            <label class="btn btn-primary" ng-model="model.construction" uib-btn-radio="'Simplified'">Simplified</label>
+                            <label class="btn btn-primary" ng-model="model.construction" uib-btn-radio="'Advanced'">Advanced</label>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="md-col-12" ng-show="model.construction=='Simplified'">
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Please Select a Strategy</label>
+                                    <select class="form-control" ng-model="model.name" ng-model-options="{ debounce: 200 }" ng-change="riskReturnSetter(strats,model)">
+                                        <option ng-repeat="strat in strats">{{strat.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Return: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The average expected return of this investment strategy over a market cycle'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input class="form-control" ng-model="model.ret" ng-disabled="model.name!='Custom'" ui-percentage-mask="2">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Risk: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The exptected standard deviation of the returns from this strategy over a market cycle'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input class="form-control" ng-model="model.risk" ng-disabled="model.name!='Custom'" ui-percentage-mask="2">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Pct Ordinary Income: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The average percentage of portfolio gains expected to be taxable at ordinary income rates'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input class="form-control" ng-model="model.pctOrdInc" ng-disabled="model.name!='Custom'" ui-percentage-mask="2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form" role="form" ng-show="model.construction=='Advanced'">
+                        <div class="well">
+                            <legend>Please Enter Allocations Below to Create a Custom Strategy</legend>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Return: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The average expected return of this investment strategy over a market cycle'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input class="form-control" ng-model="model.ret" ng-disabled="model.construction=='Advanced'" ui-percentage-mask="2">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Risk: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The exptected standard deviation of the returns from this strategy over a market cycle'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input class="form-control" ng-model="model.risk" ng-disabled="model.construction=='Advanced'" ui-percentage-mask="2">
+                                </div>
+                                  <div class="col-md-3">
+                                    <label>Pct Ordinary Income: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The average percentage of portfolio gains expected to be taxable at ordinary income rates'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input class="form-control" ng-model="model.pctOrdInc" ng-disabled="model.name!='Custom'" ui-percentage-mask="2">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-success btn-block" type="button" ng-click="">Calculate Risk and Return</button>
+                                </div>
+                            </div>
+                            <br>
+                            <table class="table table-bordered table-striped table-hover table-condensed">
+                                <tr>
+                                    <th>Asset Type</th>
+                                    <th>Asset Class</th>
+                                    <th>Asset Allocation</th>
+                                </tr>
+                                <tr ng-repeat="aClass in assetClasses">
+                                    <td>{{aClass.assetType}}</td>
+                                    <td>{{aClass.assetClass}}</td>
+                                    <td><input class="form-control input-sm" ng-model="aClass.allo" ui-percentage-mask="2"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </uib-accordion-group>
+            </uib-accordion>
+        </div>
+    </div>
+</form>

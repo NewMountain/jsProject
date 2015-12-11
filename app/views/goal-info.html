@@ -1,0 +1,157 @@
+<form novalidate>
+    <div class="panel panel-default">
+        <div class="panel-heading">Goals Based Information</div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="sel1">Please Select the Number of Financial Goals</label>
+                <select class="form-control" ng-model="goals.numGoals" ng-change="populateGoals(goals)">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                </select>
+            </div>
+            <uib-accordion close-others="oneAtATime">
+                <uib-accordion-group heading="Goal {{goal.num}}" ng-repeat="goal in goals.goals">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>What is this name of your goal?</label>
+                                <input type="text" class="form-control" ng-model="goal.displayName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="comment">Would you like to describe it further?</label>
+                                <textarea class="form-control" rows="5" id="comment" ng-model="goal.description"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>In what year will this goal begin?</label>
+                                <input type="text" class="form-control" ng-model="goal.start">
+                            </div>
+                            <div class="col-md-6">
+                                <label>In what year will this goal end?</label>
+                                <input type="text" class="form-control" ng-model="goal.end">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Will this goal change your cash flows?</label>
+                                <select class="form-control" ng-model="goal.changeFlows">
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-show="goal.changeFlows=='Yes'">
+                            <div class="col-md-6">
+                                <label for="fName1">Income:</label>
+                                <input type="text" class="form-control" id="fName1" ng-model="goal.income" ui-money-mask="0">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fName1">Expenses:</label>
+                                <input type="text" class="form-control" id="fName1" ng-model="goal.expenses" ui-money-mask="0">
+                            </div>
+                        </div>
+                        <div class="row" ng-show="goal.changeFlows=='Yes'">
+                            <div class="col-md-4">
+                                <label for="fName1">Taxable Contributions:</label>
+                                <input type="text" class="form-control" id="fName1" ng-model="goal.taxAddition" ui-money-mask="0">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="fName1">Tax-Advantaged Contributions:</label>
+                                <input type="text" class="form-control" id="fName1" ng-model="goal.taxAdvAddition" ui-money-mask="0">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="fName1">Post-Tax Contributions:</label>
+                                <input type="text" class="form-control" id="fName1" ng-model="goal.taxPostAddition" ui-money-mask="0">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"> 
+                                <label>Will this goal change your invesment style?</label>
+                                <select class="form-control" ng-model="goal.changeInvestments">
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" ng-show="goal.changeInvestments=='Yes'">
+                            <div class="col-md-12">
+                                <label>Model Construction:</label>
+                                <div class="btn-group">
+                                    <label class="btn btn-primary" ng-model="goal.construction" uib-btn-radio="'Simplified'">Simplified</label>
+                                    <label class="btn btn-primary" ng-model="goal.construction" uib-btn-radio="'Advanced'">Advanced</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row" ng-show="goal.changeInvestments=='Yes'">
+                            <div class="col-md-12" ng-show="goal.construction=='Simplified'">
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Please Select a Strategy</label>
+                                            <select class="form-control" ng-model="goal.name" ng-model-options="{ debounce: 200 }" ng-change="riskReturnSetter(strats,model)">
+                                                <option ng-repeat="strat in strats">{{strat.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Return: </label>
+                                            <input class="form-control" ng-model="goal.ret" ng-disabled="goal.name!='Custom'" ui-percentage-mask="2">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Risk: </label>
+                                            <input class="form-control" ng-model="goal.risk" ng-disabled="goal.name!='Custom'" ui-percentage-mask="2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form" role="form" ng-show="goal.construction=='Advanced'">
+                            <div class="well">
+                                <legend>Please Enter Allocations Below to Create a Custom Strategy</legend>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Return: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The average expected return of this investment strategy over a market cycle'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                        <input class="form-control" ng-model="goal.ret" ng-disabled="goal.construction=='Advanced'" ui-percentage-mask="2">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Risk: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The exptected standard deviation of the returns from this strategy over a market cycle'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                        <input class="form-control" ng-model="goal.risk" ng-disabled="goal.construction=='Advanced'" ui-percentage-mask="2">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-success btn-block" type="button" ng-click="">Calculate Risk and Return</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <table class="table table-bordered table-striped table-hover table-condensed">
+                                    <tr>
+                                        <th>Asset Type</th>
+                                        <th>Asset Class</th>
+                                        <th>Asset Allocation</th>
+                                    </tr>
+                                    <tr ng-repeat="aClass in assetClasses">
+                                        <td>{{aClass.assetType}}</td>
+                                        <td>{{aClass.assetClass}}</td>
+                                        <td><input class="form-control input-sm" ng-model="aClass.allo" ui-percentage-mask="2"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </uib-accordion-group>
+            </uib-accordion>
+        </div>
+    </div>
+</form>

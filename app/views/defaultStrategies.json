@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Income",
+    "ret": 0.05,
+    "risk": 0.075,
+    "pctOrdInc": 0.9
+  },
+  {
+    "name": "Diversified Income",
+    "ret": 0.062,
+    "risk": 0.095,
+    "pctOrdInc": 0.7
+  },
+  {
+    "name": "Balanced",
+    "ret": 0.068,
+    "risk": 0.1,
+    "pctOrdInc": 0.5
+  },
+  {
+    "name": "Moderate Growth",
+    "ret": 0.072,
+    "risk": 0.12,
+    "pctOrdInc": 0.3
+  },
+  {
+    "name": "Growth",
+    "ret": 0.075,
+    "risk": 0.15,
+    "pctOrdInc": 0.1
+  },
+  {
+    "name": "Custom",
+    "ret": 0,
+    "risk": 0,
+    "pctOrdInc": 0
+  }
+]

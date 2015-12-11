@@ -1,0 +1,35 @@
+<form novalidate>
+    <div class="panel panel-default">
+            <div class="panel-heading">Simulation Information</div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="sims">Number of Simulations: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The number of random trials used to calculate the probability of outcomes. Accepts values from 100,000 to 999,999'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                            <input type="text" class="form-control col-md-6" id="fName1" ng-model="user.sims" ui-number-mask="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="seed">Set Seed: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='A number used to create a start point for the random number generator. This number is stored so that this random simulation can be recreated at a future date.'><span class="glyphicon glyphicon-question-sign"></span></a> </label>
+                            <input type="text" class="form-control col-md-6" id="fName2" ng-model="user.seed" ui-number-mask="0">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fName1" >Inflation Rate: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The expected average inflation rate over the entire simulation. This value is used to scale the cost of expenses in the future. Please note, this simulation is highly sensitive to this input over long periods of time.'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                            <input type="text" class="form-control col-md-6" id="fName1" ng-model="user.inflation" model-options="{ debounce: 200 }" ng-change="renderFlows(cashFlows,user)" ui-percentage-mask="2">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fName2">Discount Rate: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The rate at which future amounts invested are discounted to todays dollars. This value should default to the inflation rate unless you have a strong reason to do otherwise.'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                            <input type="text" class="form-control col-md-6" id="fName2" ng-model="user.discount" ui-percentage-mask="2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="fName1" >Deviation of Expenses: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='This input is used to stress test the sensitivity of outcomes to changes in cash flow.'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                            <input type="text" class="form-control col-md-12" id="fName1" ng-model="user.expenseDeviation" ui-percentage-mask="2">
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+</form>

@@ -1,0 +1,93 @@
+<form novalidate>
+        <div class="panel panel-default">
+            <div class="panel-heading">Personal Information</div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="col-md-12">
+                        <label for="simNum"> Number of People in Simulation:
+                            <select ng-model="user.numUsers" id="simNum">
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
+                        </label>
+                    </div>
+                    <br>
+                    <div ng-show="user.numUsers>=1" ng-class="user.numUsers==1 ? 'col-md-12' : 'col-md-6'">
+                        <div class="well">
+                            <div class="row">
+                                <legend>Client 1 Information</legend>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>=1">
+                                    <label for="fName1">First Name:</label>
+                                    <input type="text" class="form-control" id="fName1" ng-model="user.c1.firstName">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>=1">
+                                    <label for="lName1">Last Name:</label>
+                                    <input type="text" class="form-control" id="lName1" ng-model="user.c1.lastName">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>=1">
+                                    <label for="age1">Age:</label>
+                                    <input type="text" class="form-control" id="age1" ng-model="user.c1.age" ng-model-options="{ debounce: 200 }" ng-change="yearsToLive(user.c1);renderFlows(cashFlows,user)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>=1">
+                                    <label for="deathAge1">Expected Age of Expiration: </label>
+                                    <input for="deathAge1" type="text" class="form-control" id="deathAge1" ng-model="user.c1.deathAge" ng-model-options="{ debounce: 200 }" ng-change="yearsToLive(user.c1);renderFlows(cashFlows,user)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>=1">
+                                    <label for="successLevel1">Success Definition: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The level, in dollars, at which success is defined. IE passing away with more than x dollars. A good default is $1000'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input for="successLevel1" type="text" class="form-control" id="successLevel1" ng-model="user.c1.successLevel" ui-money-mask="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-show="user.numUsers>1" ng-class="user.numUsers==1 ? 'col-md-12' : 'col-md-6'">
+                        <div class="well">
+                            <div class="row">
+                                <legend>Client 2 Information</legend>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>1">
+                                    <label for="fName2" >First Name:</label>
+                                    <input type="text" class="form-control" id="fName2" ng-model="user.c2.firstName">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>1">
+                                    <label for="lName1">Last Name:</label>
+                                    <input type="text" class="form-control" id="lName1" ng-model="user.c2.lastName">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>1">
+                                    <label for="age2">Age:</label>
+                                    <input type="text" class="form-control" id="age2" ng-model="user.c2.age" ng-model-options="{ debounce: 200 }" ng-change="yearsToLive(user.c2);renderFlows(cashFlows,user)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>1"> 
+                                    <label for="deathAge2">Expected Age of Expiration:  </label>
+                                    <input for="deathAge2" type="text" class="form-control" id="deathAge2" ng-model="user.c2.deathAge" ng-model-options="{ debounce: 200 }" ng-change="yearsToLive(user.c2);renderFlows(cashFlows,user)">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div ng-show="user.numUsers>1">
+                                    <label for="successLevel2">Success Definition: <a href="#" tooltip-popup-close-delay='750' uib-tooltip='The level, in dollars, at which success is defined. IE passing away with more than x dollars. A good default is $1000'><span class="glyphicon glyphicon-question-sign"></span></a></label>
+                                    <input for="successLevel2" type="text" class="form-control" id="successLevel2" ng-model="user.c2.successLevel" ui-money-mask="0">
+                                </div>
+                            </div>
+                        </div>
+                    
+                </form>
+            </div>
+        </div>
+</form>
+

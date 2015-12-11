@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Equities",
+    "subClasses": [
+      "Domestic Large Cap",
+      "Domestic Small/Mid Cap",
+      "Developed International",
+      "Emerging Markets"
+    ]
+  },
+  {
+    "name": "Fixed Income",
+    "subClasses": [
+      "Short Duration",
+      "Short Term Municipal",
+      "Intermediate Term Municipal",
+      "Intermediate Term Corporate Debt",
+      "International Debt",
+      "Emerging Market Debt",
+      "High Yield Debt"
+    ]
+  },
+  {
+    "name": "Real Assets",
+    "subClasses": [
+      "REITs",
+      "MLPs",
+      "Commodities"
+    ]
+  },
+  {
+    "name": "Multi-Strategy Assets",
+    "subClasses": [
+      "Balanced Strategy",
+      "Unconstrained Strategy"
+    ]
+  }
+]
